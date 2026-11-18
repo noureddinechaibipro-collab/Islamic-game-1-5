@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>الطريق إلى 20 — التربية الإسلامية</title>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--g:#0a4d3c;--gold:#f2b632;--cream:#fff7e0}
+body{font-family:"Segoe UI","Noto Naskh Arabic",Tahoma,Arial,sans-serif;font-size:clamp(15px,2vw,28px);min-height:100vh;color:#fff;background-color:#0a4d3c;background-image:radial-gradient(circle at 15% 10%,#17a086 0,transparent 42%),radial-gradient(circle at 90% 95%,#0e6b57 0,transparent 50%),repeating-conic-gradient(rgba(242,182,50,.07) 0 15deg,transparent 15deg 30deg);background-attachment:fixed}
+button{font:inherit}
+.btn{background:var(--gold);color:var(--g);border:0;border-radius:2em;padding:.45em 1.2em;font-weight:bold;cursor:pointer;box-shadow:0 4px 0 #b8860b;margin:.2em}
+.btn:active{transform:translateY(3px);box-shadow:none}.btn:disabled{opacity:.4;cursor:default}
+.big{font-size:1.25em;padding:.5em 1.6em}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:.5em 1em}
+.hdr h2{color:var(--gold);text-shadow:0 2px 0 #0006}
+.home{text-align:center;padding:1em 1.2em 2em;max-width:1000px;margin:auto}
+.moon{font-size:3.5em;color:var(--gold);line-height:1}
+.home h1{font-size:2.6em;color:var(--gold);text-shadow:0 3px 0 #073a2d,0 0 25px #f2b63266}
+.home p{opacity:.9;margin:.3em 0 1em}
+.sel{margin:.8em 0}
+.chip{width:2.2em;height:2.2em;border-radius:50%;border:3px solid var(--gold);background:transparent;color:#fff;cursor:pointer;margin:0 .2em;font-weight:bold}
+.chip.on{background:var(--gold);color:var(--g)}
+.names{display:flex;flex-wrap:wrap;gap:.5em;justify-content:center;margin:.6em 0 1.2em}
+.names input{font:inherit;text-align:center;padding:.3em .6em;border-radius:1em;border:3px solid;background:#fff;color:var(--g);width:9em}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(13em,1fr));gap:1em}
+.card{background:linear-gradient(160deg,#fffaf0,#ffe9a8);color:var(--g);border:4px solid var(--c);border-radius:1.2em;padding:1em .8em;cursor:pointer;box-shadow:0 6px 0 var(--c),0 10px 25px #0006;transition:transform .15s}
+.card:hover{transform:translateY(-5px) rotate(-1deg)}
+.card i{font-style:normal;font-size:2.6em;display:block}.card b{font-size:1.15em}.card small{display:block;opacity:.75;margin-top:.3em}
+.sb{display:flex;flex-wrap:wrap;gap:.6em;justify-content:center;padding:.3em 1em}
+.tchip{border:3px solid var(--c);border-radius:2em;padding:.25em 1em;background:#ffffff1f;transition:.2s}
+.tchip.act{background:var(--c);transform:scale(1.1);box-shadow:0 0 18px var(--c)}
+.tchip b{background:#fff;color:#000;border-radius:1em;padding:0 .6em;margin-right:.5em}
+.turn{border-radius:1em;padding:.35em 1em;text-align:center;font-weight:bold;margin:.5em 1em;color:#fff;text-shadow:0 1px 2px #0008}
+.qbox,.mbox{background:var(--cream);color:var(--g);border:4px solid var(--gold);border-radius:1.2em;padding:1em 1.2em;margin:.5em 1em}
+.qt{font-size:1.3em;font-weight:bold;margin-bottom:.8em;line-height:1.6}
+.ops{display:grid;grid-template-columns:1fr 1fr;gap:.6em}
+.op{display:flex;gap:.6em;align-items:center;text-align:right;background:#fff;color:var(--g);border:3px solid #0a4d3c33;border-radius:.9em;padding:.6em .8em;cursor:pointer}
+.op b{background:var(--gold);border-radius:50%;min-width:1.8em;height:1.8em;display:grid;place-items:center}
+.op:hover:not(:disabled){background:#ffeeba;border-color:var(--gold)}
+.op.right{background:#27ae60;color:#fff;border-color:#1e8449}.op.wrong{background:#e74c3c;color:#fff;border-color:#b03a2e}
+.tm{display:inline-block;background:var(--g);color:var(--gold);border-radius:1em;padding:.05em .8em;font-weight:bold;margin-bottom:.5em}
+.tm.low{background:#e74c3c;color:#fff;animation:p .6s infinite alternate}
+@keyframes p{to{transform:scale(1.2)}}
+.act{text-align:center;padding:.3em}
+.track{margin:.3em 1em}
+.lane{display:grid;grid-template-columns:9em 1fr 3em;gap:.6em;align-items:center;margin:.3em 0;padding:.1em .5em;border-radius:1em}
+.lane.act{background:#ffffff22}
+.bar{height:1.7em;background:#ffffff26;border-radius:1em;overflow:hidden;border:2px solid #fff6}
+.bar i{display:flex;align-items:center;justify-content:flex-end;height:100%;border-radius:1em;transition:width .9s;font-style:normal}
+.sc{font-weight:bold;color:var(--gold);font-size:1.2em}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.7em;max-width:1000px;margin:.6em auto;padding:0 1em}
+.cell{aspect-ratio:1.3;font-size:2em;font-weight:bold;color:#fff;border:3px solid var(--gold);border-radius:1em;cursor:pointer;background:linear-gradient(145deg,#1fb392,#0e7a63);box-shadow:0 5px 0 #073a2d}
+.cell.gold{background:linear-gradient(145deg,#ffe27a,#e0a100);color:#6b4600;animation:sh 2s infinite alternate}
+.cell.gold::after{content:" ⭐";font-size:.6em}
+@keyframes sh{to{box-shadow:0 0 22px #ffd54f,0 5px 0 #b8860b}}
+.cell:disabled{cursor:default;animation:none;box-shadow:none;opacity:.9}.cell.no{background:#7f8c8d;border-color:#555}
+.hint{text-align:center;opacity:.85}
+.ww{position:relative;width:min(84vw,58vh,500px);margin:.6em auto}
+.ww svg{width:100%;display:block;direction:ltr;filter:drop-shadow(0 8px 14px #0008)}
+.ptr{position:absolute;top:-10px;left:50%;transform:translateX(-50%);border:16px solid transparent;border-top:36px solid #fff;z-index:3;filter:drop-shadow(0 2px 2px #0008)}
+.mil{display:flex;flex-wrap:wrap;gap:1em;padding:.5em 1em;align-items:flex-start}
+.ladder{list-style:none;padding:0;width:12em;margin:0 auto;font-size:.85em}
+.ladder li{display:flex;justify-content:space-between;padding:.15em .8em;border-radius:.6em;margin:.1em 0;background:#0003}
+.ladder .cur{background:var(--gold);color:var(--g);font-weight:bold;transform:scale(1.06)}
+.ladder .done{opacity:.45}.ladder .safe{color:var(--gold);border:2px solid var(--gold)}.ladder .cur.safe{color:var(--g)}
+.main{flex:1;min-width:17em}
+.life{text-align:center}#msg{text-align:center;font-weight:bold;min-height:1.6em;margin:.4em}
+.gold{color:var(--gold)}.big.gold{font-size:2em;font-weight:bold;margin:.5em}
+.pod{display:grid;gap:.6em;max-width:520px;margin:1em auto}
+.pl{display:flex;justify-content:space-between;border:4px solid;border-radius:1em;padding:.5em 1em;background:#fff2;font-weight:bold}
+#ov{position:fixed;inset:0;background:#000a;display:grid;place-items:center;z-index:50;padding:.5em}
+.mbox{width:min(96vw,900px);max-height:94vh;overflow:auto;margin:0;background:#0b6b57;color:#fff;padding:.6em}
+.mbox .qbox{margin:.4em 0}.mbox .turn{margin:.4em 0}
+.conf{position:fixed;top:-2em;z-index:99;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(112vh) rotate(540deg)}}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1em;padding:.5em 1em;max-width:1000px;margin:auto}.two>div{display:grid;gap:.5em;align-content:start}
+.lk{background:var(--cream);color:var(--g);border:3px solid var(--gold);border-radius:.9em;padding:.55em .8em;cursor:pointer;font-weight:bold}
+.lk:hover{background:#ffeeba}.lk.sl{background:var(--gold);transform:scale(1.04)}.lk.dn{color:#fff;border-color:#fff;cursor:default}
+.shk{animation:shk .4s}@keyframes shk{25%{transform:translateX(8px)}75%{transform:translateX(-8px)}}
+.slots,.pool{display:grid;gap:.5em;padding:.4em 1em;max-width:800px;margin:auto}.pool{grid-template-columns:1fr 1fr}
+.slot{background:#ffffff22;border:3px dashed #fff8;border-radius:.9em;padding:.5em .8em}
+.slot b{background:var(--gold);color:var(--g);border-radius:50%;display:inline-grid;place-items:center;width:1.6em;height:1.6em;margin-left:.6em}
+.slot.ok{background:#27ae60;border-style:solid}.slot.no{background:#e74c3c;border-style:solid}
+.fix{background:var(--cream);color:var(--g);border-radius:1em;padding:.7em 1em;margin:.6em auto;max-width:800px;line-height:1.8}
+.mcg{display:grid;grid-template-columns:repeat(5,1fr);gap:.6em;padding:.5em 1em;max-width:1000px;margin:auto}
+.mc{min-height:5.5em;border-radius:1em;border:3px solid var(--gold);font-weight:bold;cursor:pointer;background:linear-gradient(145deg,#1fb392,#0e7a63);color:var(--gold);padding:.3em}
+.mc .bk{font-size:2em}.mc .ft{display:none;font-size:.85em;color:var(--g)}
+.mc.fl{background:var(--cream)}.mc.fl .bk{display:none}.mc.fl .ft{display:block}.mc.mt .ft{color:#fff}
+.xw{display:flex;flex-wrap:wrap;gap:1em;padding:.5em 1em;justify-content:center;align-items:flex-start}
+.xg{display:grid;gap:3px;overflow:auto;max-width:100%}
+.xc,.xe{width:1.55em;height:1.55em}
+.xc{position:relative;background:var(--cream);color:var(--g);border-radius:.3em;display:grid;place-items:center;font-weight:bold;cursor:pointer}
+.xc sup{position:absolute;top:-1px;right:2px;font-size:.5em}.xc.sel{outline:3px solid var(--gold);background:#ffeeba}.xc.dn{color:#fff}
+.cl{flex:1;min-width:15em;max-width:26em;background:#0003;border-radius:1em;padding:.6em 1em;font-size:.8em}.cl h3{color:var(--gold)}.cl ul{list-style:none;padding:0}
+.cl li{padding:.25em .4em;border-radius:.5em;cursor:pointer}.cl li:hover{background:#fff2}.cl li.cur{background:var(--gold);color:var(--g)}.cl li.dn{text-decoration:line-through;opacity:.55;cursor:default}
+.xin{margin:.5em 1em;text-align:center}.xin input{font:inherit;padding:.3em .8em;border-radius:1em;border:3px solid var(--gold);width:min(90%,14em);text-align:center}
+@media(max-width:640px){.mcg{grid-template-columns:repeat(3,1fr)}.pool{grid-template-columns:1fr}.two{gap:.5em}}
+.by{margin-top:1.6em;color:var(--gold);font-weight:bold;font-size:1.1em;text-shadow:0 2px 0 #0006}
+@media(max-width:640px){.ops{grid-template-columns:1fr}.lane{grid-template-columns:6em 1fr 2.4em}.grid{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const $=s=>document.querySelector(s);const app=$('#app');
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const Q=(q,...o)=>({q,o,a:0}),TF=(q,v)=>({q,o:["صحيح","خطأ"],a:v?0:1,f:1});
+
+/* ===================== بنك الأسئلة (من الملخصات المرفقة) ===================== */
+const RACE=[
+Q("متى كان فتح مكة؟","20 رمضان 8هـ","10 شوال 6هـ","1 محرم 9هـ","17 رمضان 2هـ"),
+Q("ما سبب فتح مكة؟","نقض قريش لصلح الحديبية","منع المسلمين من الحج","هجوم على المدينة","قتل عثمان بن عفان"),
+Q("كم صنمًا حطّمه النبي ﷺ حول الكعبة؟","360","300","313","1400"),
+Q("من الصحابي الذي كتب إلى قريش يخبرهم بقدوم النبي ﷺ؟","حاطب بن أبي بلتعة","عثمان بن عفان","عمر بن الخطاب","أبو بكر الصديق"),
+Q("في أي سنة هجرية أُبرم صلح الحديبية؟","6هـ","8هـ","2هـ","10هـ"),
+Q("من ممثّل قريش في عقد صلح الحديبية؟","سهيل بن عمرو","أبو سفيان","خالد بن الوليد","عكرمة بن أبي جهل"),
+Q("ما مدة توقف الحرب في صلح الحديبية؟","10 سنوات","5 سنوات","3 سنوات","سنة واحدة"),
+Q("تحت ماذا بايع الصحابة بيعة الرضوان؟","الشجرة","الكعبة","المنبر","جبل أحد"),
+TF("الكفاءة هي الشرط الأساسي لاستحقاق التكليف بتحمل المسؤولية.",1),
+Q("من هو المكلَّف؟","كل مسلم عاقل بالغ","كل مسلم","كل بالغ","كل عاقل"),
+Q("ليس من أسس الكفاءة:","الثراء","العلم","الخبرة","الأمانة"),
+Q("كم عدد آيات سورة يوسف؟","111","110","120","99"),
+Q("ما الاسم الآخر لغزوة فتح مكة؟","الفتح الأعظم","الفتح المبين","يوم الفرقان","غزوة العسرة"),
+Q("ما القبيلة التي هاجمتها بنو بكر بإعانة قريش سرًّا؟","خزاعة","ثقيف","هوازن","غطفان"),
+Q("من زوجات النبي ﷺ التي خرجت معه إلى الحديبية؟","أم سلمة","خديجة","عائشة","حفصة")
+];
+const MIL=[
+Q("ما معنى الغيب لغةً؟","كل ما غاب عن إدراك حواس الإنسان","كل ما هو مرئي","كل ما يُسمع","كل ما يُلمس"),
+Q("ما الحكم الشرعي للإيمان بالغيب؟","واجب على كل مسلم ومسلمة","مندوب","مباح","مكروه"),
+Q("كم عدد أركان الإيمان؟","ستة","أربعة","خمسة","سبعة"),
+Q("أي مما يلي من الغيب المطلق؟","وقت الوفاة","الفيروسات","الكواكب","قصة يوسف"),
+Q("أي مما يلي من الغيب النسبي؟","الفيروسات","مقدار الرزق","وقت الوفاة","موعد قيام الساعة"),
+Q("ما الأصل في حكم الزواج؟","الندب والاستحباب","الوجوب","الكراهة","التحريم"),
+Q("متى يكون الزواج واجبًا؟","إذا خشي على نفسه الوقوع في الحرام","إذا بلغ سن الثلاثين","إذا كان غنيًا","إذا أراد الأولاد"),
+Q("أي مما يلي ليس ركنًا من أركان الزواج؟","الوليمة","الصداق","الصيغة","الإشهاد"),
+Q("قوله تعالى «لتسكنوا إليها وجعل بينكم مودة ورحمة» يدل على مقصد:","تحقيق السكن النفسي والمودة","تكثير سواد الأمة","حفظ المال","حفظ العقل"),
+Q("أي مما يلي ليس من الضرورات الخمس؟","حفظ الجاه","حفظ الدين","حفظ النفس","حفظ العقل"),
+Q("بماذا يتحقق حفظ العرض؟","بالوفاء بين الزوجين واجتناب الخيانة","بالكسب الحلال","بالتعلم والتعليم","باجتناب المحرمات"),
+Q("الحق الذي يشمل «التوسط والاعتدال في استغلال البيئة» هو حق:","المحيط (البيئة)","الله","النفس","الغير"),
+Q("ما معنى «يجتبيك» في قوله تعالى «وكذلك يجتبيك ربك»؟","يصطفيك ويختارك","يحميك","يعلّمك","يرزقك"),
+Q("في أي ظرف نزلت سورة يوسف؟","آخر العهد المكي بين عام الحزن وبيعة العقبة","بعد غزوة بدر","بعد فتح مكة","في أول البعثة"),
+Q("قوله تعالى «اجعلني على خزائن الأرض إني حفيظ عليم» يدل على:","مبادرة الكفء لخدمة الصالح العام","حب السلطة والرئاسة","الانتقام من إخوته","الهروب من السجن")
+];
+const CELL=[
+Q("الوفاء بالأمانة هو:","المحافظة على العهد والوديعة وعدم تضييعهما","جمع المال وادخاره","الاعتماد على الغير","السكوت عن الخطأ"),
+Q("من أمثلة حق الله:","توحيد الله وعبادته","الصبر واليقين","العفة والحياء","التوسط في استغلال البيئة"),
+Q("يتحقق حفظ العقل بـ:","التعلم والتعليم والتأمل في عظمة الخلق","الكسب الحلال","الوفاء بين الزوجين","اجتناب المحرمات"),
+Q("أي مما يلي من آثار الوفاء بالأمانة في المجتمع؟","نشر الثقة ومكافحة الفساد","انتشار الشك","التعدي على الحقوق","تضييع الأمانات"),
+Q("الإيمان اصطلاحًا هو:","التصديق بالقلب والإقرار باللسان والعمل بالجوارح","التصديق بالقلب فقط","النطق بالشهادتين فقط","العمل بالجوارح فقط"),
+Q("أي مما يلي ليس من شروط الإيمان؟","حب الدنيا وملذاتها","شكر الله على نعمه","محبة الله ورسوله","الخوف من الله والرجاء في رحمته"),
+Q("من آثار الإيمان بالغيب في السلوك:","الاستقامة والإقبال على الطاعات","الطمع والجشع","التعلق بالدنيا","الحسد والحقد"),
+Q("من النبي الذي صبر على فقد ابنه وأيقن بوعد الله؟","يعقوب عليه السلام","إبراهيم عليه السلام","نوح عليه السلام","موسى عليه السلام"),
+Q("الخطبة هي:","تواعد بين رجل وامرأة على الزواج","عقد الزواج","كتابة الصداق","حفل الزفاف"),
+Q("يكون الزواج مكروهًا في حق:","من يسيء من خلاله إلى المرأة التي سيتزوجها","من خشي الوقوع في الحرام","من لا يرغب في الأولاد","من كان غنيًا"),
+Q("على أي أساس يكون اختيار الزوج؟","الدين والخلق","المال والجاه","النسب فقط","الجمال فقط"),
+Q("من تسامح معه النبي ﷺ وكان من أشد المعارضين لبنود صلح الحديبية؟","عمر بن الخطاب","أبو بكر الصديق","عثمان بن عفان","علي بن أبي طالب"),
+Q("التكليف هو:","الأمر الصادر عن الله تعالى للمكلفين على سبيل الوجوب","كل عمل مباح","عقوبة شرعية","عمل تطوعي"),
+Q("أول من نال يوسف عليه السلام ثقته من الذين ذُكروا في درس الوفاء بالأمانة:","العزيز","ملك مصر","السجينان","إخوته"),
+Q("ما معنى «سيارة» في قوله تعالى «وجاءت سيارة»؟","جمع من المسافرين في قافلة","سفينة","جماعة من الجند","قبيلة")
+];
+const SEG=[["الحديبية","#e74c3c"],["فتح مكة","#f39c12"],["الأمانة","#27ae60"],["الكفاءة","#2e86de"],["الإيمان والغيب","#8e44ad"],["الزواج","#e84393"],["سورة يوسف","#16a085"],["⭐ مفاجأة","#c79100"]];
+const WH=[
+[Q("كم بلغ عدد المسلمين الذين خرجوا مع النبي ﷺ إلى الحديبية؟","1400","700","3000","313"),Q("أي القبيلتين دخلت في عهد المسلمين في صلح الحديبية؟","خزاعة","بنو بكر","ثقيف","هوازن")],
+[Q("من كبار قريش الذين أسلموا بعد فتح مكة؟","أبو سفيان","أبو جهل","أبو لهب","أمية بن خلف"),Q("لماذا أخفى النبي ﷺ استعداداته لفتح مكة؟","لئلا تستعد قريش للحرب وتُراق الدماء","ليهرب أهل مكة","لأن الصحابة لم يستعدوا","لتأجيل الفتح")],
+[Q("يتحقق حفظ المال بـ:","الكسب الحلال والإخلاص والوفاء في العمل","التبذير","الاقتراض","إخفاء الثروة"),TF("ليس للإنسان حرية في أداء حقوق الله تعالى أو تركها.",1)],
+[Q("الاستحقاق هو الأحقية والأولوية في تحمل المسؤولية بناءً على:","توفر شروط الكفاءة","القرابة","المال","السن"),Q("ما الأزمة التي بادر يوسف عليه السلام لمواجهتها بتحمل خزائن مصر؟","أزمة الجفاف","الحرب","الطوفان","الوباء")],
+[TF("أركان الإيمان الستة كلها من الغيبيات.",1),Q("الإيمان لغةً هو:","التصديق والوثوق","الخوف","الحب","الطاعة"),Q("أي مما يلي من عواقب التكذيب بالغيب على مستوى السلوك؟","الطمع والجشع والتعلق بالدنيا","الاستقامة","الإقبال على الطاعات","الدعوة إلى الخير")],
+[TF("يجوز الاتفاق على إسقاط الصداق في عقد الزواج.",0),Q("قال ﷺ: «يا معشر الشباب من استطاع منكم الباءة فليتزوج» يدل على مقصد:","تحقيق الإحصان والعفاف","تكثير سواد الأمة","حفظ المال","إنشاء أسرة فقط")],
+[Q("ما معنى «الجُبّ» في سورة يوسف؟","البئر","السجن","القافلة","القصر"),Q("ما ترتيب سورة يوسف في المصحف؟","12","10","14","53")]
+];
+
+/* ===================== أدوات عامة ===================== */
+let snd=true,ac,cIv,N=2,turn=0,teams=[];
+const names=["الفريق الأول","الفريق الثاني","الفريق الثالث","الفريق الرابع"],TC=['#e74c3c','#2e86de','#9b59b6','#f39c12'],TE=['🦁','🦅','🐎','🐪'];
+function beep(f,d=.15,t='sine'){if(!snd)return;try{ac=ac||new(window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type=t;o.frequency.value=f;g.gain.value=.15;o.connect(g);g.connect(ac.destination);o.start();o.stop(ac.currentTime+d)}catch(e){}}
+const ok=()=>{beep(660,.12);setTimeout(()=>beep(880,.22),120)},bad=()=>beep(170,.4,'sawtooth');
+function setup(){teams=Array.from({length:N},(_,i)=>({n:names[i],s:0,c:TC[i],e:TE[i]}));turn=0}
+const hdr=t=>`<div class="hdr"><button class="btn" onclick="home()">🏠 الرئيسية</button><h2>${t}</h2><button class="btn" onclick="snd=!snd;this.textContent=snd?'🔊':'🔇'">${snd?'🔊':'🔇'}</button></div>`;
+const sb=()=>`<div class="sb">${teams.map((x,i)=>`<div class="tchip ${i==turn?'act':''}" style="--c:${x.c}">${x.e} ${x.n}<b>${x.s}</b></div>`).join('')}</div>`;
+function modal(h){const o=document.createElement('div');o.id='ov';o.innerHTML=`<div class="mbox">${h}</div>`;document.body.appendChild(o);return o.firstChild}
+function closeM(){const o=$('#ov');o&&o.remove()}
+function confetti(){for(let i=0;i<40;i++){const s=document.createElement('span');s.className='conf';s.textContent=['🎉','⭐','🌙','✨'][i%4];s.style.cssText=`left:${Math.random()*100}vw;font-size:${1+Math.random()*1.5}em;animation-duration:${3+Math.random()*3}s;animation-delay:${Math.random()*1.5}s`;document.body.appendChild(s);setTimeout(()=>s.remove(),8000)}}
+
+/* عرض سؤال: يملأ الصندوق ويستدعي cb(صحيح؟) */
+function qView(box,q,cb,sec){
+ const opts=(q.f?q.o.map((t,i)=>({t,c:i==q.a})):shuffle(q.o.map((t,i)=>({t,c:i==q.a}))));
+ box.innerHTML=`<div class="qbox">${sec?'<div class="tm"></div>':''}<div class="qt">${q.q}</div><div class="ops">${opts.map((o,i)=>`<button class="op"><b>${'أبجد'[i]}</b>${o.t}</button>`).join('')}</div></div>`;
+ const btns=[...box.querySelectorAll('.op')];let done=0,iv;
+ const fin=i=>{if(done)return;done=1;clearInterval(iv);btns.forEach((b,k)=>{b.disabled=true;if(opts[k].c)b.classList.add('right');else if(k==i)b.classList.add('wrong')});const r=i>=0&&opts[i].c;r?ok():bad();cb(r)};
+ btns.forEach((b,k)=>b.onclick=()=>fin(k));
+ if(sec){let t=sec;const el=box.querySelector('.tm');el.textContent='⏱ '+t;iv=setInterval(()=>{t--;el.textContent='⏱ '+t;el.classList.toggle('low',t<=5);if(t<=0)fin(-1)},1000)}
+ return{half(){shuffle(btns.filter((b,k)=>!opts[k].c&&!b.disabled)).slice(0,2).forEach(b=>{b.style.visibility='hidden';b.disabled=true})}}
+}
+
+/* ===================== الشاشة الرئيسية ===================== */
+function home(){clearInterval(cIv);closeM();
+ app.innerHTML=`<div class="home"><div class="moon">☪</div><h1>الطريق إلى 20</h1><p>لعبة تفاعلية لتثبيت دروس التربية الإسلامية — السنة الأولى باك</p>
+ <div class="sel">عدد الفرق: ${[2,3,4].map(n=>`<button class="chip ${n==N?'on':''}" onclick="N=${n};home()">${n}</button>`).join('')}</div>
+ <div class="names">${names.slice(0,N).map((x,i)=>`<input value="${x}" style="border-color:${TC[i]}" onchange="names[${i}]=this.value">`).join('')}</div>
+ <div class="cards">
+ <div class="card" style="--c:#e74c3c" onclick="startRace()"><i>🏁</i><b>سباق الفرق</b><small>15 سؤالًا · مؤقّت</small></div>
+ <div class="card" style="--c:#d4a017" onclick="startMil()"><i>💰</i><b>من سيربح الحسنات؟</b><small>15 سؤالًا · وسائل مساعدة</small></div>
+ <div class="card" style="--c:#8e44ad" onclick="startWheel()"><i>🎡</i><b>عجلة الحظ</b><small>15 سؤالًا · مفاجآت</small></div>
+ <div class="card" style="--c:#16a085" onclick="startCells()"><i>✨</i><b>الخلايا الذهبية</b><small>15 سؤالًا · نقاط مضاعفة</small></div>
+ <div class="card" style="--c:#2e86de" onclick="startLink()"><i>🔗</i><b>الربط والترتيب</b><small>15 ربطًا + 4 ترتيبات</small></div>
+ <div class="card" style="--c:#e84393" onclick="startCards()"><i>🃏</i><b>البطاقات</b><small>15 زوجًا · 3 جولات</small></div>
+ <div class="card" style="--c:#3498db" onclick="startCross()"><i>🔠</i><b>الكلمات المتقاطعة</b><small>18 كلمة</small></div>
+ </div><div class="by">🎓 تصميم الأستاذ: نورالدين شعيبي</div></div>`}
+
+/* ===================== 1) سباق الفرق ===================== */
+let R;
+function startRace(){setup();R={qs:shuffle(RACE),i:0};R.max=Math.ceil(R.qs.length/N)*10;raceQ()}
+const track=()=>teams.map((x,i)=>`<div class="lane ${i==turn?'act':''}"><div style="color:${x.c};font-weight:bold;filter:brightness(1.4)">${x.e} ${x.n}</div><div class="bar"><i style="width:${Math.max(9,Math.min(100,x.s/R.max*100))}%;background:${x.c}">🏇</i></div><div class="sc">${x.s}</div></div>`).join('');
+function raceQ(){
+ if(R.i>=R.qs.length)return end();
+ const t=teams[turn];
+ app.innerHTML=hdr('🏁 سباق الفرق')+`<div class="track" id="tr">${track()}</div><div class="turn" style="background:${t.c}">${t.e} دور ${t.n} — السؤال ${R.i+1} من ${R.qs.length}</div><div id="qb"></div><div id="ac" class="act"></div>`;
+ qView($('#qb'),R.qs[R.i],r=>{if(r)t.s+=10;R.i++;turn=(turn+1)%N;$('#tr').innerHTML=track();$('#ac').innerHTML=`<button class="btn big" onclick="raceQ()">${R.i>=R.qs.length?'🏆 النتيجة':'التالي ◀'}</button>`},20)
+}
+
+/* ===================== 2) من سيربح الحسنات؟ ===================== */
+const LV=[100,200,300,500,1000,2000,4000,8000,16000,32000,64000,125000,250000,500000,1000000];
+let M;
+function startMil(){M={i:0,l50:1,lc:1};milQ()}
+function milEnd(v,msg){clearInterval(cIv);app.innerHTML=hdr('💰 من سيربح الحسنات؟')+`<div class="home"><h1>${msg}</h1><div class="big gold">${v.toLocaleString('en')} حسنة</div><button class="btn big" onclick="startMil()">🔁 إعادة</button><button class="btn big" onclick="home()">🏠 الرئيسية</button></div>`;if(v>0)confetti()}
+function milQ(){
+ clearInterval(cIv);const i0=M.i;
+ app.innerHTML=hdr('💰 من سيربح الحسنات؟')+`<div class="mil"><ul class="ladder">${LV.map((v,i)=>`<li class="${i==i0?'cur':i<i0?'done':''} ${i==4||i==9?'safe':''}"><span>${i+1}</span><span>${v.toLocaleString('en')}</span></li>`).reverse().join('')}</ul>
+ <div class="main"><div id="qb"></div><div class="life"><button class="btn" id="b50" ${M.l50?'':'disabled'}>٥٠ : ٥٠</button><button class="btn" id="bc" ${M.lc?'':'disabled'}>👥 استشر القسم</button><button class="btn" id="bw">🏳️ انسحاب</button></div><div id="msg"></div><div id="ac" class="act"></div></div></div>`;
+ const c=qView($('#qb'),MIL[i0],r=>{clearInterval(cIv);['b50','bc','bw'].forEach(x=>$('#'+x).disabled=true);
+  if(r){$('#msg').textContent='🎉 إجابة صحيحة!';$('#ac').innerHTML=i0==14?`<button class="btn big" onclick="milEnd(1000000,'مبروك! ربحت المليون حسنة 🎉')">🏆 النتيجة</button>`:`<button class="btn big" onclick="M.i++;milQ()">السؤال التالي ◀</button>`}
+  else{$('#msg').textContent='❌ إجابة خاطئة';$('#ac').innerHTML=`<button class="btn big" onclick="milEnd(${i0>=10?LV[9]:i0>=5?LV[4]:0},'انتهت الرحلة')">النتيجة</button>`}},0);
+ $('#b50').onclick=()=>{M.l50=0;$('#b50').disabled=true;c.half()};
+ $('#bc').onclick=()=>{M.lc=0;$('#bc').disabled=true;let t=30;const m=$('#msg');m.textContent='⏳ استشارة القسم: '+t;cIv=setInterval(()=>{t--;m.textContent='⏳ استشارة القسم: '+t;if(t<=0){clearInterval(cIv);m.textContent='⌛ انتهى الوقت، اختر إجابتك'}},1000)};
+ $('#bw').onclick=()=>milEnd(i0?LV[i0-1]:0,'قرّرت الانسحاب');
+}
+
+/* ===================== 3) عجلة الحظ ===================== */
+let W,rot=0;
+function startWheel(){setup();W={used:new Set(),n:0,busy:0};rot=0;wheelView()}
+function wheelSvg(){const p=(a,r)=>{a=a*Math.PI/180;return(r*Math.sin(a)).toFixed(1)+','+(-r*Math.cos(a)).toFixed(1)};
+ return`<svg id="wh" viewBox="-200 -200 400 400" style="transform:rotate(${rot%360}deg)">`+SEG.map((s,i)=>`<path d="M0,0 L${p(i*45,196)} A196,196 0 0 1 ${p((i+1)*45,196)} Z" fill="${s[1]}" stroke="#fff" stroke-width="3"/><text transform="rotate(${i*45+22.5-90}) translate(182,0)" text-anchor="end" dominant-baseline="middle" fill="#fff" font-size="17" font-weight="bold">${s[0]}</text>`).join('')+`<circle r="30" fill="#f2b632" stroke="#fff" stroke-width="5"/><text text-anchor="middle" dominant-baseline="middle" font-size="26">☪</text></svg>`}
+function wheelView(){app.innerHTML=hdr('🎡 عجلة الحظ')+sb()+`<div class="ww"><div class="ptr"></div>${wheelSvg()}</div><div class="act"><button class="btn big" id="sp" onclick="spin()">أدر العجلة 🎡</button><button class="btn" onclick="end()">🏆 إنهاء</button></div>`}
+function spin(){if(W.busy)return;W.busy=1;$('#sp').disabled=true;rot+=1800+Math.random()*360;const s=$('#wh');s.style.transition='transform 4.5s cubic-bezier(.15,.65,.1,1)';s.style.transform=`rotate(${rot}deg)`;beep(500,.1);setTimeout(land,4700)}
+function land(){
+ const idx=Math.floor(((360-rot%360)%360)/45),sur=idx==7,L=sur?Math.random()*7|0:idx;
+ let pool=WH[L].filter(q=>!W.used.has(q));if(!pool.length)pool=WH.flat().filter(q=>!W.used.has(q));
+ if(!pool.length)return end();
+ const q=pool[Math.random()*pool.length|0];W.used.add(q);W.busy=0;
+ const t=teams[turn],pts=sur?20:10;
+ const m=modal(`<div class="turn" style="background:${t.c}">${t.e} ${t.n} — ${sur?'⭐ مفاجأة! ضعف النقاط · ':''}${SEG[L][0]}</div><div id="qb"></div><div id="ac" class="act"></div>`);
+ qView(m.querySelector('#qb'),q,r=>{if(r)t.s+=pts;W.n++;turn=(turn+1)%N;m.querySelector('#ac').innerHTML=`<button class="btn big" onclick="wheelNext()">متابعة ◀</button>`},20)
+}
+function wheelNext(){closeM();rot%=360;W.n>=15?end():wheelView()}
+
+/* ===================== 4) الخلايا الذهبية ===================== */
+let C;
+function startCells(){setup();C={qs:shuffle(CELL),g:shuffle([...Array(CELL.length).keys()]).slice(0,3),d:{},n:0};cellsView()}
+function cellsView(){app.innerHTML=hdr('✨ الخلايا الذهبية')+sb()+`<div class="grid">${C.qs.map((q,i)=>{const d=C.d[i];return`<button class="cell ${C.g.includes(i)?'gold':''} ${d?d.k:''}" ${d?`disabled style="${d.k=='ok'?'background:'+d.c+';color:#fff':''}"`:''} onclick="openCell(${i})">${d?(d.k=='ok'?'✔':'✘'):i+1}</button>`}).join('')}</div><p class="hint">اختر خلية للفريق صاحب الدور · الخلايا ⭐ الذهبية بنقاط مضاعفة</p>`}
+function openCell(i){
+ const g=C.g.includes(i),t=teams[turn];
+ const m=modal(`<div class="turn" style="background:${t.c}">${t.e} ${t.n} — الخلية ${i+1} ${g?'⭐ ذهبية: 20 نقطة':''}</div><div id="qb"></div><div id="ac" class="act"></div>`);
+ qView(m.querySelector('#qb'),C.qs[i],r=>{if(r)t.s+=g?20:10;C.d[i]={k:r?'ok':'no',c:t.c};C.n++;turn=(turn+1)%N;m.querySelector('#ac').innerHTML=`<button class="btn big" onclick="cellsNext()">متابعة ◀</button>`},20)
+}
+function cellsNext(){closeM();C.n>=C.qs.length?end():cellsView()}
+
+/* ===================== 5) الربط والترتيب ===================== */
+const MATCH=[
+{t:"أحكام الزواج: اربط الحالة بحكمها",p:[["من خشي على نفسه الوقوع في الحرام","واجب"],["من لا يخاف الوقوع في الحرام ولا يرغب في الأولاد","مباح"],["من يسيء إلى المرأة التي سيتزوجها","مكروه"],["من كان مصابًا بمرض معدٍ خطير","محرَّم"],["الأصل في الزواج","الندب والاستحباب"]]},
+{t:"المفاهيم: اربط المصطلح بتعريفه",p:[["الكفاءة","مجموع الصفات الدالة على قدرة المكلَّف على تحمل المسؤولية"],["الاستحقاق","الأحقية والأولوية في تحمل المسؤولية"],["المسؤولية","ما عُهد إلى المكلف بأدائه وحفظه ويُسأل عنه"],["الغيب النسبي","ما يمكن الاطلاع عليه إذا توفرت شروطه كالفيروسات"],["الغيب المطلق","ما لا يمكن الاطلاع عليه كوقت الوفاة"]]},
+{t:"السيرة: اربط الاسم بدوره",p:[["سهيل بن عمرو","ممثل قريش في صلح الحديبية"],["حاطب بن أبي بلتعة","كتب إلى قريش يخبرهم بقدوم النبي ﷺ"],["بيعة الرضوان","بايع فيها الصحابة تحت الشجرة على عدم الفرار"],["خزاعة","القبيلة التي دخلت في عهد المسلمين"],["بنو بكر","القبيلة التي دخلت في عهد قريش"]]}
+];
+const ORD=[
+{t:"رتّب أحداث صلح الحديبية",s:["رؤيا النبي ﷺ دخول مكة مع أصحابه","الخروج للعمرة مع 1400 مسلم","إرسال عثمان بن عفان إلى قريش","بيعة الرضوان تحت الشجرة","إبرام الصلح مع سهيل بن عمرو"]},
+{t:"رتّب أحداث فتح مكة",s:["نقض قريش للصلح بإعانة بني بكر على خزاعة","وفد خزاعة يخبر النبي ﷺ بما حدث","الاستعداد للفتح سرًّا","دخول مكة وتحطيم الأصنام","العفو العام: اذهبوا فأنتم الطلقاء"]},
+{t:"رتّب مراحل الزواج",s:["اختيار الزوج على أساس الدين والخلق","الخطبة","توفر الأهلية والصداق والصيغة","الإشهاد وتوثيق العقد","تحقيق مقاصد الزواج: السكن والمودة والرحمة"]},
+{t:"رتّب مسار يوسف عليه السلام",s:["الرؤيا والبشارة بالحكم والنبوة","كيد إخوته وإلقاؤه في الجب","التقاط السيارة له واسترقاقه","دخوله بيت عزيز مصر معزَّزًا مكرَّمًا","توليه خزائن الأرض وإنقاذ البلاد من الجفاف"]}
+];
+let L;
+const upd=()=>{const e=$('#sbx');if(e)e.innerHTML=sb()};
+function startLink(){setup();L={r:[...MATCH.map(m=>({...m,k:'m'})),...ORD.map(o=>({...o,k:'o'}))],i:0};linkRound()}
+function linkRound(){
+ if(L.i>=L.r.length)return end();
+ const r=L.r[L.i];turn=L.i%N;const t=teams[turn];L.sel=null;L.m=0;
+ app.innerHTML=hdr('🔗 الربط والترتيب')+`<div id="sbx">${sb()}</div><div class="turn" style="background:${t.c}">${t.e} ${t.n} — الجولة ${L.i+1} من ${L.r.length}: ${r.t}</div><div id="lb"></div><div id="ac" class="act"></div>`;
+ r.k=='m'?matchR(r,t):ordR(r,t)
+}
+const nextBtn=()=>{$('#ac').innerHTML=`<button class="btn big" onclick="L.i++;linkRound()">${L.i+1>=L.r.length?'🏆 النتيجة':'الجولة التالية ◀'}</button>`};
+function matchR(r,t){
+ const mk=(s,x,p)=>`<button class="lk" data-s="${s}" data-p="${p}">${x}</button>`;
+ $('#lb').innerHTML=`<div class="two"><div>${shuffle(r.p.map((x,i)=>mk(0,x[0],i))).join('')}</div><div>${shuffle(r.p.map((x,i)=>mk(1,x[1],i))).join('')}</div></div>`;
+ $('#lb').querySelectorAll('.lk').forEach(b=>b.onclick=()=>{
+  if(b.classList.contains('dn'))return;const s=L.sel;
+  if(!s){L.sel=b;b.classList.add('sl');return}
+  s.classList.remove('sl');
+  if(s===b){L.sel=null;return}
+  if(s.dataset.s==b.dataset.s){L.sel=b;b.classList.add('sl');return}
+  L.sel=null;
+  if(s.dataset.p==b.dataset.p){[s,b].forEach(x=>{x.classList.add('dn');x.style.background=t.c});ok();t.s+=10;upd();if(++L.m==r.p.length)nextBtn()}
+  else{bad();[s,b].forEach(x=>{x.classList.add('shk');setTimeout(()=>x.classList.remove('shk'),450)})}
+ })
+}
+function ordR(r,t){
+ const items=shuffle(r.s.map((x,i)=>({x,i}))),pl=[];let fn=0;
+ const draw=()=>{
+  $('#lb').innerHTML=`<div class="slots">${r.s.map((_,k)=>{const p=pl[k];return`<div class="slot ${fn&&p?(p.i==k?'ok':'no'):''}"><b>${k+1}</b>${p?p.x:'…'}</div>`}).join('')}</div>`+
+  (fn?(pl.every((p,k)=>p.i==k)?'':`<div class="fix"><b>الترتيب الصحيح:</b><br>${r.s.map((x,k)=>`${k+1}. ${x}`).join('<br>')}</div>`):`<div class="pool">${items.map((it,k)=>pl.includes(it)?'':`<button class="lk" data-k="${k}">${it.x}</button>`).join('')}</div><div class="act"><button class="btn" id="un">↩ تراجع</button></div>`);
+  if(fn)return;
+  $('#lb').querySelectorAll('.lk').forEach(b=>b.onclick=()=>{pl.push(items[b.dataset.k]);pl.length==items.length?fin():draw()});
+  $('#un').onclick=()=>{pl.pop();draw()}
+ };
+ const fin=()=>{fn=1;const c=pl.filter((p,k)=>p.i==k).length;t.s+=c*8;upd();c==pl.length?ok():bad();draw();nextBtn()};
+ draw()
+}
+
+/* ===================== 6) البطاقات والكلمات المتقاطعة ===================== */
+function menu2(){app.innerHTML=hdr('🧩 البطاقات والكلمات المتقاطعة')+`<div class="home"><h1 style="font-size:2em">اختر النشاط</h1><div class="cards"><div class="card" style="--c:#e67e22" onclick="startCards()"><i>🃏</i><b>بطاقات الذاكرة</b><small>15 زوجًا في 3 جولات</small></div><div class="card" style="--c:#2e86de" onclick="startCross()"><i>🔠</i><b>الكلمات المتقاطعة</b><small>18 كلمة</small></div></div></div>`}
+const CARDS=[
+[["فتح مكة","20 رمضان 8هـ"],["الأصنام","360 صنمًا"],["الطلقاء","أهل مكة الذين عفا عنهم النبي ﷺ"],["عدد المسلمين في الحديبية","1400"],["مدة الهدنة","10 سنوات"]],
+[["حق الله","توحيده وعبادته"],["حق النفس","الصبر واليقين"],["حق الغير","العفة والحياء"],["حق المحيط","التوسط والاعتدال في استغلال البيئة"],["حفظ العقل","التعلم والتعليم والتأمل في عظمة الخلق"]],
+[["الغيب المطلق","وقت الوفاة"],["الغيب النسبي","الفيروسات"],["من أسس الكفاءة","العلم والخبرة والأمانة"],["الصداق","المهر الذي يقدمه الزوج عند كتابة العقد"],["الصيغة","اللفظ الدال على النكاح إيجابًا وقبولًا"]]
+];
+let K;
+function startCards(){setup();K={i:0};cardsR()}
+function cardsR(){
+ if(K.i>=CARDS.length)return end();
+ K.open=[];K.lock=0;K.f=0;
+ const cs=shuffle(CARDS[K.i].flatMap((p,i)=>[{t:p[0],p:i},{t:p[1],p:i}]));
+ app.innerHTML=hdr('🃏 بطاقات الذاكرة')+`<div id="sbx">${sb()}</div><p class="hint">الجولة ${K.i+1} من ${CARDS.length} — اقلب بطاقتين: المصطلح وما يناسبه</p><div class="mcg">${cs.map(c=>`<button class="mc"><span class="bk">☪</span><span class="ft">${c.t}</span></button>`).join('')}</div><div id="ac" class="act"></div>`;
+ const bs=[...document.querySelectorAll('.mc')];
+ bs.forEach((b,k)=>b.onclick=()=>{
+  if(K.lock||b.classList.contains('fl'))return;
+  b.classList.add('fl');K.open.push(k);beep(500,.08);
+  if(K.open.length<2)return;
+  K.lock=1;const[a,c]=K.open;K.open=[];
+  if(cs[a].p==cs[c].p){ok();const t=teams[turn];t.s+=10;[a,c].forEach(x=>{bs[x].classList.add('mt');bs[x].style.background=t.c});upd();K.lock=0;
+   if(++K.f==5)$('#ac').innerHTML=`<button class="btn big" onclick="K.i++;cardsR()">${K.i+1>=CARDS.length?'🏆 النتيجة':'الجولة التالية ◀'}</button>`}
+  else{bad();setTimeout(()=>{[a,c].forEach(x=>bs[x].classList.remove('fl'));turn=(turn+1)%N;upd();K.lock=0},1300)}
+ })
+}
+/* الكلمات المتقاطعة: تُولَّد الشبكة تلقائيًا في كل مرة */
+const norm=s=>s.replace(/[\u064B-\u0652\u0640\s]/g,'').replace(/[أإآٱ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه');
+const CW=[
+["الحديبية","معاهدة أبرمها النبي ﷺ مع قريش سنة 6هـ"],
+["الرضوان","اسم البيعة التي بايع فيها الصحابة تحت الشجرة"],
+["خزاعة","قبيلة دخلت في عهد المسلمين يوم الحديبية"],
+["الأصنام","حطّمها النبي ﷺ عند فتح مكة وعددها 360"],
+["الطلقاء","قال النبي ﷺ لقريش: اذهبوا فأنتم ..."],
+["الكفاءة","مجموع الصفات الدالة على قدرة المكلَّف على تحمل المسؤولية"],
+["الاستحقاق","الأحقية والأولوية في تحمل المسؤولية بناءً على الكفاءة"],
+["الأمانة","المحافظة على العهد والوديعة وعدم تضييعها"],
+["الغيب","كل ما غاب عن إدراك حواس الإنسان"],
+["الإيمان","التصديق بالقلب والإقرار باللسان والعمل بالجوارح"],
+["الصداق","المهر الذي يقدمه الزوج عند كتابة العقد"],
+["الخطبة","تواعد بين رجل وامرأة على الزواج"],
+["الإحصان","من مقاصد الزواج مع العفاف"],
+["المسؤولية","ما عُهد إلى المكلف بأدائه ويُسأل عنه ويُحاسب عليه"],
+["الجب","البئر الذي أُلقي فيه يوسف عليه السلام"],
+["التكليف","الأمر الصادر عن الله تعالى للمكلفين على سبيل الوجوب"],
+["يعقوب","نبي صبر على فقد ابنه يوسف عليهما السلام"],
+["الوفاء","الالتزام بالعهود، من القيم التي تجلت في صلح الحديبية"]
+];
+function genCross(){
+ const all=CW.map(([w,c])=>{const l=[...w];return{l,n:l.map(norm),clue:c}});
+ let best=[],bA=1e9;
+ const area=p=>{const r1=Math.max(...p.map(w=>w.r+(w.d?w.n.length-1:0))),c1=Math.max(...p.map(w=>w.c+(w.d?0:w.n.length-1))),r0=Math.min(...p.map(w=>w.r)),c0=Math.min(...p.map(w=>w.c));return Math.max(r1-r0+1,c1-c0+1)*1000+(r1-r0+1)*(c1-c0+1)};
+ for(let a=0;a<400;a++){
+  const cells=new Map(),put=[],K=(r,c)=>r+','+c;
+  const fit=(w,r,c,d)=>{const dr=d?1:0,dc=d?0:1,L=w.n.length;let x=0;
+   if(cells.has(K(r-dr,c-dc))||cells.has(K(r+dr*L,c+dc*L)))return -1;
+   for(let i=0;i<L;i++){const rr=r+dr*i,cc=c+dc*i,e=cells.get(K(rr,cc));
+    if(e){if(e.n!=w.n[i]||e.m&(d?2:1))return -1;x++}
+    else if(cells.has(K(rr+dc,cc+dr))||cells.has(K(rr-dc,cc-dr)))return -1}
+   return x};
+  const pl=(w,r,c,d)=>{w.n.forEach((n,i)=>{const rr=r+(d?i:0),cc=c+(d?0:i),e=cells.get(K(rr,cc));if(e)e.m|=d?2:1;else cells.set(K(rr,cc),{n,r:rr,c:cc,m:d?2:1})});put.push({...w,r,c,d})};
+  const ws=shuffle(all).sort((x,y)=>y.n.length-x.n.length);
+  pl(ws[0],0,0,0);let rest=ws.slice(1),prog=1;
+  while(prog&&rest.length){prog=0;const nx=[];
+   for(const w of rest){const cand=[];
+    for(const e of cells.values())for(let i=0;i<w.n.length;i++)if(w.n[i]==e.n)for(const d of[0,1]){const r=e.r-(d?i:0),c=e.c-(d?0:i);if(fit(w,r,c,d)>=1)cand.push([r,c,d])}
+    if(cand.length){pl(w,...cand[Math.random()*cand.length|0]);prog=1}else nx.push(w)}
+   rest=nx}
+  const A=area(put);if(put.length>best.length||(put.length==best.length&&A<bA)){best=put;bA=A}}
+ const r0=Math.min(...best.map(w=>w.r)),c0=Math.min(...best.map(w=>w.c));
+ best.forEach(w=>{w.r-=r0;w.c-=c0;w.done=0});
+ const H=Math.max(...best.map(w=>w.r+(w.d?w.n.length:1))),Wd=Math.max(...best.map(w=>w.c+(w.d?1:w.n.length)));
+ best.sort((a,b)=>a.r-b.r||a.c-b.c);let num=0,last='';
+ best.forEach(w=>{const k=w.r+','+w.c;if(k!=last){num++;last=k}w.num=num});
+ return{w:best,H,Wd,sel:null}
+}
+let X;
+function startCross(){setup();X=genCross();crossView()}
+const wCells=w=>w.l.map((ch,i)=>`x${w.r+(w.d?i:0)}_${w.c+(w.d?0:i)}`);
+function crossView(){
+ const st=new Map();X.w.forEach(w=>{const k=w.r+','+w.c;st.set(k,w.num)});
+ const has=new Set();X.w.forEach(w=>wCells(w).forEach(id=>has.add(id)));
+ let g='';for(let r=0;r<X.H;r++)for(let c=0;c<X.Wd;c++){const id=`x${r}_${c}`,n=st.get(r+','+c);g+=has.has(id)?`<div class="xc" id="${id}">${n?`<sup>${n}</sup>`:''}<span></span></div>`:'<div class="xe"></div>'}
+ const li=d=>X.w.map((w,i)=>w.d==d?`<li id="cl${i}" onclick="selX(${i})">${w.num}. ${w.clue} <small>(${w.l.length} حروف)</small></li>`:'').join('');
+ app.innerHTML=hdr('🔠 الكلمات المتقاطعة')+`<div id="sbx">${sb()}</div><div class="xin"><div id="xq" class="turn" style="background:#0005">اختر رقمًا من القائمة أو من الشبكة ثم اكتب الإجابة</div><input id="xa" placeholder="اكتب الإجابة" onkeydown="if(event.key=='Enter')chkX()"> <button class="btn" onclick="chkX()">✔ تحقق</button><button class="btn" onclick="revX()">👁 كشف الحل</button><button class="btn" onclick="end()">🏆 إنهاء</button></div>
+ <div class="xw"><div class="xg" style="grid-template-columns:repeat(${X.Wd},1.55em)">${g}</div><div class="cl"><h3>↔ أفقي</h3><ul>${li(0)}</ul><h3>↕ عمودي</h3><ul>${li(1)}</ul></div></div>`;
+ X.w.forEach((w,i)=>wCells(w).forEach(id=>{$('#'+id).addEventListener('click',()=>selX(i))}))
+}
+function selX(i){
+ const w=X.w[i];if(w.done)return;X.sel=i;
+ document.querySelectorAll('.xc.sel').forEach(e=>e.classList.remove('sel'));document.querySelectorAll('.cl li.cur').forEach(e=>e.classList.remove('cur'));
+ wCells(w).forEach(id=>$('#'+id).classList.add('sel'));$('#cl'+i).classList.add('cur');
+ const t=teams[turn];$('#xq').style.background=t.c;$('#xq').textContent=`${t.e} ${t.n} — ${w.num}. ${w.clue} (${w.l.length} حروف)`;$('#xa').value='';$('#xa').focus()
+}
+function fillX(w,col){w.done=1;wCells(w).forEach((id,i)=>{const e=$('#'+id);e.querySelector('span').textContent=w.l[i];e.style.background=col;e.classList.add('dn');e.classList.remove('sel')});$('#cl'+X.w.indexOf(w)).className='dn';X.sel=null;
+ turn=(turn+1)%N;upd();$('#xq').style.background='#0005';$('#xq').textContent='اختر الكلمة التالية';$('#xa').value='';
+ if(X.w.every(x=>x.done))setTimeout(end,900)}
+function chkX(){
+ if(X.sel==null)return;const w=X.w[X.sel];
+ if(norm($('#xa').value)==w.n.join('')){ok();teams[turn].s+=10;fillX(w,teams[turn].c)}
+ else{bad();turn=(turn+1)%N;upd();$('#xa').value='';const t=teams[turn];$('#xq').style.background=t.c;$('#xq').textContent=`❌ إجابة خاطئة — الدور على ${t.e} ${t.n}`}
+}
+function revX(){if(X.sel!=null)fillX(X.w[X.sel],'#7f8c8d')}
+
+/* ===================== النتيجة النهائية ===================== */
+function end(){clearInterval(cIv);closeM();
+ const s=[...teams].sort((a,b)=>b.s-a.s),md=['🥇','🥈','🥉','🎖️'];
+ app.innerHTML=hdr('🏆 النتيجة النهائية')+`<div class="home"><h1>${s[1]&&s[0].s==s[1].s?'تعادل! 🤝':'الفائز: '+s[0].e+' '+s[0].n}</h1><div class="pod">${s.map((x,i)=>`<div class="pl" style="border-color:${x.c}"><span>${md[i]} ${x.e} ${x.n}</span><span class="gold">${x.s}</span></div>`).join('')}</div><button class="btn big" onclick="home()">🏠 الرئيسية</button></div>`;confetti()}
+
+home();
+</script>
+</body>
+</html>
